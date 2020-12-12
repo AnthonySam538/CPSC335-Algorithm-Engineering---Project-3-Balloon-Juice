@@ -1,0 +1,13 @@
+/* Author: Anthony Sam (anthonysam538@csu.fullerton.edu)
+This is the cascading style sheet file. This .css file provides 
+supplemental details about how the html page will look like. We can see 
+that it centers the text, changes the font, and sets the canvas background 
+color to black. */
+
+body {
+  text-align: center;
+  font-family: sans-serif;
+}
+canvas {
+  background-color: black;
+}
