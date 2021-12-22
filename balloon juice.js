@@ -9,8 +9,8 @@ function setup() // p5.js setup function | This will be called once and only onc
     createCanvas(grid.width * grid.cell_size, grid.height * grid.cell_size);
 
     current_balloon = { dark: "00", pale: "13", veined: "06" };
-    balloons = [current_balloon.dark + current_balloon.pale + current_balloon.veined]; // balloons that exist in the graph
-    explored_balloons = []; // balloons that exist in the graph, and we know their exits
+    balloons = [current_balloon.dark + current_balloon.pale + current_balloon.veined];  // balloons that exist in the graph
+    explored_balloons = [];  // balloons that exist in the graph, and we know their exits
     destination = "031303";
 
     // Create the adjacency list on the left side of the canvas (displays explored_balloons)
@@ -23,9 +23,9 @@ function setup() // p5.js setup function | This will be called once and only onc
     balloon_graph = [];
     balloon_graph[0] = [0];
     textAlign(RIGHT, TOP);
-    text(current_balloon.dark + ' ' + current_balloon.pale + ' ' + current_balloon.veined, 42 * grid.cell_size, 34 * grid.cell_size);
+    text(current_balloon.dark + ' ' + current_balloon.pale + ' ' + current_balloon.veined, 42 * grid.cell_size, 36 * grid.cell_size);
     push();
-    translate(43 * grid.cell_size, 33 * grid.cell_size);
+    translate(43 * grid.cell_size, 35 * grid.cell_size);
     rotate(-HALF_PI);
     textAlign(LEFT, TOP);
     text(current_balloon.dark + ' ' + current_balloon.pale + ' ' + current_balloon.veined, 0, 0);
@@ -73,7 +73,7 @@ function draw() // p5.js draw function | This will be called repeatedly
             text("Balloon juice delivered to base.", 0, 2 * grid.cell_size);
             pop();
             noLoop();
-            destination = ""; // the bot is now free to wander at its leisure as it explores the rest of the balloons
+            destination = "";  // the bot is now free to wander at its leisure as it explores the rest of the balloons
         }
     }
 
@@ -209,7 +209,7 @@ function determineExits(dark, pale, veined)
         fill(255);
         textAlign(LEFT, TOP);
         textSize(grid.cell_size);
-        text('(' + dark + ' ' + pale + ' ' + veined + ") ==> " + output, 0, (30 + explored_balloons.length) * grid.cell_size);
+        text('(' + dark + ' ' + pale + ' ' + veined + ") ⇒ " + output, 0, (30 + explored_balloons.length) * grid.cell_size);
         pop();
     }
 
@@ -248,8 +248,8 @@ function determineExits(dark, pale, veined)
             fill(255);
             textAlign(RIGHT, TOP);
             textSize(grid.cell_size);
-            text(d + ' ' + p + ' ' + v, 42 * grid.cell_size, (16 + balloons.length) * 2 * grid.cell_size);
-            translate((41 + 2 * balloons.length) * grid.cell_size, 33 * grid.cell_size);
+            text(d + ' ' + p + ' ' + v, 42 * grid.cell_size, (17 + balloons.length) * 2 * grid.cell_size);
+            translate((41 + 2 * balloons.length) * grid.cell_size, 35 * grid.cell_size);
             rotate(-HALF_PI);
             textAlign(LEFT, TOP);
             text(d + ' ' + p + ' ' + v, 0, 0);
@@ -289,7 +289,7 @@ function determineExits(dark, pale, veined)
         {
             for (let column = 0; column < balloons.length; ++column)
             {
-                balloon_graph[row][column] = Math.min(balloon_graph[row][column], balloon_graph[element][column] + balloon_graph[row][element]); // Warshall-Floyd algorithm
+                balloon_graph[row][column] = Math.min(balloon_graph[row][column], balloon_graph[element][column] + balloon_graph[row][element]);  // Warshall-Floyd algorithm
             }
         }
     });
@@ -297,7 +297,7 @@ function determineExits(dark, pale, veined)
     push();
     // clear away the current adjacency matrix
     fill(0);
-    rect(43 * grid.cell_size, 34 * grid.cell_size, 101 * grid.cell_size, 101 * grid.cell_size);
+    rect(43 * grid.cell_size, 35 * grid.cell_size, 101 * grid.cell_size, 101 * grid.cell_size);
     // display the current adjacency matrix
     fill(255);
     textAlign(LEFT, TOP);
@@ -307,9 +307,9 @@ function determineExits(dark, pale, veined)
         for (let column = 0; column < balloons.length; ++column)
         {
             if (balloon_graph[row][column] == Number.MAX_VALUE)
-                text('∞', (43 + column * 2) * grid.cell_size, (34 + row * 2) * grid.cell_size); // Print '∞' instead of Number.MAX_VALUE
+                text('∞', (43 + column * 2) * grid.cell_size, (36 + row * 2) * grid.cell_size);  // Print '∞' instead of Number.MAX_VALUE
             else
-                text(balloon_graph[row][column], (43 + column * 2) * grid.cell_size, (34 + row * 2) * grid.cell_size);
+                text(balloon_graph[row][column], (43 + column * 2) * grid.cell_size, (36 + row * 2) * grid.cell_size);
         }
     }
     pop();
@@ -320,5 +320,5 @@ function determineExits(dark, pale, veined)
     if (output.length > 33)
         output = output.substring(0, 32) + '\n' + output.substring(33);
 
-    return output.substring(0, output.length - 1); // omit the trailing space character
+    return output.substring(0, output.length - 1);  // omit the trailing space character
 }
